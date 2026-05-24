@@ -43,6 +43,24 @@ npx prisma db seed
 npm run dev
 ```
 
+### Vercel Deployment
+
+For Vercel Hobby deployments, keep the Vercel build command as:
+
+```bash
+npm run vercel-build
+```
+
+This script runs `next build`. Prisma migrations are applied separately from the deploy because some Supabase direct database URLs on `:5432` are not reachable from Vercel build machines.
+
+Before deploying a schema change, run migrations from a local machine that can reach the database:
+
+```bash
+set -a; . ./.env.local; set +a; npx prisma migrate deploy
+```
+
+Use a Supabase pooler connection string for Vercel runtime if the direct database host is unreachable.
+
 ---
 
 ## How Reservation Expiry Works

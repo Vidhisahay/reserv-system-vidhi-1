@@ -9,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { getProducts } from "@/lib/api";
+import { getProductsWithStock } from "@/lib/products";
 import type { ProductStock } from "@/types";
 
 export const dynamic = "force-dynamic";
@@ -40,7 +40,7 @@ function stockBadgeLabel(stock: ProductStock) {
 }
 
 export default async function HomePage() {
-  const products = await getProducts();
+  const products = await getProductsWithStock();
 
   return (
     <main className="min-h-screen bg-background">
